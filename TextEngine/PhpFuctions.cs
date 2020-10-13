@@ -8,18 +8,6 @@ using TextEngine.Misc;
 
 namespace TextEngine
 {
-    public class SDEneme
-    {
-        public int Deneme { get; set; }
-        public string this[int index]
-        {
-            get
-            {
-                return "Ne var";
-            }
-        }
-
-    }
     public static class PhpFuctions
     {
 #pragma warning disable IDE1006 // Adlandırma Stilleri
