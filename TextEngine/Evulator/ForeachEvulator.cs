@@ -20,11 +20,11 @@ namespace TextEngine.Evulator
             var inlist = this.EvulateText(@in);
             if (inlist == null || !(inlist is IEnumerable list)) return null;
             var svar = new KeyValues<object>();
+            this.Evulator.LocalVariables.Add(svar);
             var result = new TextEvulateResult();
             foreach (var item in list)
             {
                 svar[varname] = item;
-                this.Evulator.LocalVariables.Add(svar);
                 var cresult = tag.EvulateValue(0, 0, vars);
                 if (cresult == null) continue;
                 result.TextContent += cresult.TextContent;

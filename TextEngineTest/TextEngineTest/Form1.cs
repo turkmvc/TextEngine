@@ -23,7 +23,7 @@ namespace TextEngineTest
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            TextEngineTest5();
+            TextEngineTest6();
         }
         public class CustomClass
         {
@@ -199,6 +199,18 @@ namespace TextEngineTest
             var result = pd.Items.Compute(new ParDeneme());
            
 
+
+        }
+        private void TextEngineTest6()
+        {
+            TextEvulator evulator = new TextEvulator();
+            evulator.Text = "{set name='boolvalue' value='true'}{%(boolvalue) ? 'Değer True' : 'Değer False'}\r\n" +
+                "{unset name='boolvalue'}{%(boolvalue) ? 'Değer True' : 'Değer False'}";
+            //Parametrelerin attirbute alamayacağınıbelirttik aksi halde yukarı kod syntax hatası verecektir.
+            evulator.ParamNoAttrib = true;
+            evulator.Parse();
+            var result = evulator.Elements.EvulateValue();
+            MessageBox.Show(result.TextContent);
         }
     }
 }

@@ -52,10 +52,10 @@ namespace TextEngine.Evulator
             tonum = (int)Convert.ChangeType(tores, TypeCode.Int32);
 		    var result = new TextEvulateResult();
             var svar = new KeyValues<object>();
+            this.Evulator.LocalVariables.Add(svar);
             for (int i = startnum; i < tonum; i += stepnum)
 		    {
                 svar[varname] = i;
-                this.Evulator.LocalVariables.Add(svar);
 			    var cresult = tag.EvulateValue(0, 0, vars);
                 if (cresult == null) continue;
 			    result.TextContent += cresult.TextContent;
@@ -65,9 +65,9 @@ namespace TextEngine.Evulator
                     this.Evulator.LocalVariables.Remove(svar);
                     return result;
                 }
-			else if (cresult.Result == TextEvulateResultEnum.EVULATE_BREAK)
-			{
-                    break;
+			    else if (cresult.Result == TextEvulateResultEnum.EVULATE_BREAK)
+			    {
+                        break;
                 }
             }
             this.Evulator.LocalVariables.Remove(svar);

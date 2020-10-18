@@ -65,6 +65,7 @@ namespace TextEngine.Text
             this.NoParseEnabled = false;
             this.DecodeAmpCode = true;
             this.TrimMultipleSpaces = true;
+
         }
         public TextEvulator(string text = null, bool isfile = false)
         {
@@ -135,6 +136,7 @@ namespace TextEngine.Text
             this.EvulatorTypes["repeat"] = typeof(RepeatEvulator);
             this.EvulatorTypes["set"] = typeof(SetEvulator);
             this.EvulatorTypes["unset"] = typeof(UnsetEvulator);
+            this.EvulatorTypes["include"] = typeof(IncludeEvulator);
         }
 
         private void InitAmpMaps()

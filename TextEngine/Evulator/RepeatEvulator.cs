@@ -22,10 +22,10 @@ namespace TextEngine.Evulator
             var varname = tag.GetAttribute("current_repeat");
             var result = new TextEvulateResult();
             var svar = new KeyValues<object>();
+            this.Evulator.LocalVariables.Add(svar);
             for (int i = 0; i < tonum; i++)
             {
                 svar[varname] = i;
-                this.Evulator.LocalVariables.Add(svar);
                 var cresult = tag.EvulateValue(0, 0, vars);
                 if (cresult == null) continue;
                 result.TextContent += cresult.TextContent;
