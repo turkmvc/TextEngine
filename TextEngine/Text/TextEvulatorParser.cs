@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TextEngine.Text
@@ -582,8 +583,10 @@ namespace TextEngine.Text
                             tagElement.DirectClosed = true;
                             tagElement.Closed = true;
                         }
-                        if (this.Evulator.AutoClosedTags.Contains(tagElement.ElemName))
+                        string elname = tagElement.ElemName.ToLowerInvariant();
+                        if (this.Evulator.AutoClosedTags.Any(e => e.ToLowerInvariant() == elname))
                         {
+                        
                             tagElement.Closed = true;
                             tagElement.AutoClosed = true;
                         }

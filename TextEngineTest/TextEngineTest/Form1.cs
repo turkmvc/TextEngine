@@ -23,7 +23,14 @@ namespace TextEngineTest
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            TextEngineTest6();
+            //TextEngineTest6();
+           var te = new TextEvulator("[SET name='numeric' value='5'][B]Deneme: [%numeric][/B][SET name='numeric' value='55']DenemeTest: [%numeric][if c='numeric==55']Değer 55[/if]");
+            te = new TextEvulator("[if c='numeric==55']Değer 55[/if]");
+            te.LeftTag = '[';
+            te.RightTag = ']';
+            te.Parse();
+            var r = te.Elements.EvulateValue();
+
         }
         public class CustomClass
         {

@@ -215,6 +215,7 @@ namespace TextEngine.ParDecoder
                     if(current.Value.ToString() == "!")
                     {
                         unlemused = !unlemused;
+                        previtem = current;
                         continue;
                     }
                     if ((this.IsParItem() && current.Value.ToString() == ",") || (this.IsArray() && current.Value.ToString() == "=>" && (waitvalue == null || waitvalue.ToString() == "")) || (this.IsObject() && current.Value.ToString() == ":" && (waitvalue == null || waitvalue.ToString() == "") ))
@@ -384,7 +385,10 @@ namespace TextEngine.ParDecoder
                         {
                             if (xoperator.Value.ToString() == ".")
                             {
-                                lastvalue = ComputeActions.GetProp(currentitemvalue.ToString(), lastvalue);
+                                if(currentitemvalue != null && !string.IsNullOrEmpty(currentitemvalue.ToString()))
+                                {
+                                    lastvalue = ComputeActions.GetProp(currentitemvalue.ToString(), lastvalue);
+                                }
                             }
                             else
                             {
@@ -412,7 +416,6 @@ namespace TextEngine.ParDecoder
                         }
                         else if (nextop != "." && ((xoperator.Value.ToString() != "+" && xoperator.Value.ToString() != "-") || nextop == "" || (ComputeActions.PriotiryStop.Contains(nextop))))
                         {
-                            
                             var opresult = ComputeActions.OperatorResult(lastvalue, currentitemvalue, xoperator.Value.ToString());
                             lastvalue = opresult;
                         }
