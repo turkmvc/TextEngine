@@ -9,6 +9,5 @@ namespace TextEngine.XPathClasses
         bool IsXPathPar();
         XPathBlockContainer XPathBlockList { get; set; }
         IXPathBlockContainer Parent { get; set; }
-
     }
 }

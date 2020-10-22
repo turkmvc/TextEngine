@@ -300,7 +300,7 @@ namespace TextEngine.XPathClasses
                 }
                 if (xoperator != null)
                 {
-                    if (XPathExpression.protirystop.Contains(xoperator.Value.ToString()))
+                    if (XPathExpression.priotirystop.Contains(xoperator.Value.ToString()))
                     {
                         if (waitop != null)
                         {
@@ -309,7 +309,7 @@ namespace TextEngine.XPathClasses
                             waitop = null;
                         }
                     }
-                    if ((xoperator.Value.ToString() != "+" && xoperator.Value.ToString() != "-") || nextop == null || XPathExpression.protirystop.Contains(nextop))
+                    if ((xoperator.Value.ToString() != "+" && xoperator.Value.ToString() != "-") || nextop == null || XPathExpression.priotirystop.Contains(nextop))
                     {
                         curvalue = ComputeActions.OperatorResult(curvalue, expvalue, xoperator.Value.ToString());
 

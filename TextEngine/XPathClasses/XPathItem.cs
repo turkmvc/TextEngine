@@ -62,7 +62,7 @@ namespace TextEngine.XPathClasses
             {
                 var cur = xpath[i];
                 var next = (i + 1 < xpath.Length) ? xpath[i + 1] : '\0';
-                if(cur == '|' ||cur == ')' || cur == '(')
+                if(cur == '|' || cur == ')' || cur == '(')
                 {
                     if (string.IsNullOrEmpty(curblock.BlockName))
                     {
@@ -84,7 +84,14 @@ namespace TextEngine.XPathClasses
                     }
                     XPathExpression newexp = null;
                     newexp = XPathExpression.Parse(xpath, ref i);
-                    curexp.Add(newexp);
+                    if (!string.IsNullOrEmpty(curblock.BlockName))
+                    {
+                        curblock.XPathExpressions.Add(newexp);
+                    }
+                    else
+                    {
+                        curexp.Add(newexp);
+                    }
                     continue;
                 }
                 else if (cur == '|' || cur == '(')
@@ -155,7 +162,6 @@ namespace TextEngine.XPathClasses
                     }
                     else
                     {
-
                         blocks.Add(curblock);
                         curblock = new XPathBlock();
                         if (next == '/')
@@ -182,6 +188,10 @@ namespace TextEngine.XPathClasses
                         throw new Exception("Syntax Error");
                     }
                     continue;
+                }
+                else
+                {
+
                 }
                 curstr.Append(cur);
             }

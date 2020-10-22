@@ -7,7 +7,7 @@ namespace TextEngine.XPathClasses
 {
     public class XPathExpression
     {
-        public static List<string> protirystop = new List<string>()
+        public static List<string> priotirystop = new List<string>()
         {
             "and",
             "&&",
@@ -88,7 +88,7 @@ namespace TextEngine.XPathClasses
                     curstr.Clear();
                     inquot = true;
                     quotchar = cur;
-                    curstr.Clear();
+                    //curstr.Clear();
                     continue;
                 }
                 if (inquot)
