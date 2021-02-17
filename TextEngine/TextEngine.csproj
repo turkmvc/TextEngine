@@ -4,6 +4,8 @@
 	<TargetFrameworks>netcoreapp2.2;net452</TargetFrameworks>
 	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 	<Platforms>AnyCPU;x86</Platforms>
+	<Version>1.0.2</Version>
+	<Authors>macmillan</Authors>
   </PropertyGroup>
 
 

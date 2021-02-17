@@ -38,7 +38,7 @@ namespace TextEngine.Evulator
         protected bool ConditionSuccess(TextElement tag, string attr = "c")
         {
 		    var condition = (tag.NoAttrib) ? tag.Value : tag.GetAttribute(attr);
-            if (string.IsNullOrEmpty(condition)) return true;
+            if (condition == null) return true;
 		    var res = this.EvulateText(condition);
             if(res is bool b)
             {
