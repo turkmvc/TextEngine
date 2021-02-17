@@ -57,7 +57,6 @@ namespace TextEngine.Text
                     i = this.pos;
                     continue;
                 }
-                tag.BaseEvulator = this.Evulator;
 
                 if (!tag.SlashUsed)
                 {
@@ -227,7 +226,8 @@ namespace TextEngine.Text
             bool inspec = false;
             TextElement tagElement = new TextElement
             {
-                Parent = parent
+                Parent = parent,
+                BaseEvulator = this.Evulator
             };
             bool istextnode = false;
             bool intag = false;
@@ -441,6 +441,7 @@ namespace TextEngine.Text
                     i = this.pos;
                     continue;
                 }
+
                 if (tagElement.ElementType == TextElementType.Parameter && this.Evulator.ParamNoAttrib)
                 {
                     if (cur != this.Evulator.RightTag)
@@ -449,7 +450,14 @@ namespace TextEngine.Text
                         continue;
                     }
                 }
-
+                if(namefound &&  tagElement.NoAttrib)
+                {
+                    if(cur != this.Evulator.RightTag)
+                    {
+                        current.Append(cur);
+                        continue;
+                    }
+                }
                 if (firstslashused && namefound)
                 {
                     if (cur != this.Evulator.RightTag)
@@ -565,7 +573,11 @@ namespace TextEngine.Text
                             tagElement.ElemName = current.ToString();
                             current.Clear();
                         }
-                        if (currentName.ToString() == "##set_TAG_ATTR##")
+                        if(tagElement.NoAttrib)
+                        {
+                            tagElement.Value = current.ToString();
+                        }
+                        else if (currentName.ToString() == "##set_TAG_ATTR##")
                         {
                             tagElement.TagAttrib = current.ToString();
                         }

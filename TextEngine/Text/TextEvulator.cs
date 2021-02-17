@@ -41,6 +41,7 @@ namespace TextEngine.Text
         public bool TrimStartEnd { get; set; }
         public Dictionary<string, string> AmpMaps { get; private set; }
         public List<string> ConditionalTags { get; private set; }
+        public List<string> NoAttributedTags { get; private set; }
         public SavedMacros SavedMacrosList { get; private set; }
         private bool isParseMode;
         public bool IsParseMode
@@ -93,6 +94,8 @@ namespace TextEngine.Text
             {
                 this.Text = text;
             }
+
+            this.InitNoAttributedTags();
             this.InitEvulator();
             this.InitAutoClosed();
             this.InitAmpMaps();
@@ -102,6 +105,11 @@ namespace TextEngine.Text
         {
             if (!this.AllowParseCondition || !this.IsParseMode || !this.ConditionalTags.Contains(element.ElemName)) return;
             element.Parent.EvulateValue(element.Index, element.Index + 1);
+        }
+        private void InitNoAttributedTags()
+        {
+            this.NoAttributedTags = new List<string>();
+            this.NoAttributedTags.Add("if");
         }
         private void InitConditionalTags()
         {

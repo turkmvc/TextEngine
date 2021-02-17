@@ -23,11 +23,10 @@ namespace TextEngineTest
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-        /*
             //TextEngineTest6();
             TextEvulator evulator = new TextEvulator();
             evulator.Text = "{tag}içerik: <b>{%'Mesaj: ' + mesaj + ', Uzunluk: ' + strlen_cw(mesaj) + ':'}</b>{/tag}";
-            evulator.Text = "<cw><uyeler><uye name='macmillan'>Üye</uye><uye name='xuye'>XÜye</uye><uye>YÜye</uye></uyeler></cw>";
+            evulator.Text = "<cw><uyeler><uye name='macmillan'>Üye</uye><uye name='xuye'>XÜye</uye><uye attr='kestane'>YÜye</uye></uyeler></cw>";
 
             //Parametrelerin attirbute alamayacağınıbelirttik aksi halde yukarı kod syntax hatası verecektir.
             evulator.GloblaParameters = new CustomClass();
@@ -35,10 +34,10 @@ namespace TextEngineTest
             evulator.LeftTag = '<';
             evulator.RightTag = '>';
             evulator.Parse();
-           var items = evulator.Elements.FindByXPath("(cw/uyeler/uye)[@name]");
-           // var items = evulator.Elements.FindByXPath("cw/uyeler/uye[@name]");
+           //var items = evulator.Elements.FindByXPath("(cw/uyeler/uye)[@name]");
+            var items = evulator.Elements.FindByXPath("cw/uyeler/uye[@name='xuye' or @name='macmillan'][1]");
             var result = evulator.Elements.EvulateValue();
-            MessageBox.Show(result.TextContent);*/
+            MessageBox.Show(result.TextContent);
 
 
 
@@ -94,7 +93,7 @@ namespace TextEngineTest
         private void TextEngineTest1()
         {
             TextEvulator evulator = new TextEvulator();
-            evulator.Text = "{set name='vars' value='isim + 5'}{if c='vars==10'}Değerler: İsim {%isim}, vars: {%vars}{/if}";
+            evulator.Text = "{set name='vars' value='isim + 5'}{if vars==10}Değerler: İsim {%isim}, vars: {%vars}{/if}";
             evulator.Parse();
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["isim"] = 5;
@@ -180,8 +179,8 @@ namespace TextEngineTest
         }
         private void TextEngineTest6()
         {
-            var te = new TextEvulator("[SET name='numeric' value='5'][B]Deneme: [%numeric][/B][SET name='numeric' value='55']DenemeTest: [%numeric][if c='numeric==55']Değer 55[/if]");
-            te = new TextEvulator("[if c='numeric==55']Değer 55[/if]");
+            var te = new TextEvulator("[SET name='numeric' value='5'][B]Deneme: [%numeric][/B][SET name='numeric' value='55']DenemeTest: [%numeric][if numeric==55]Değer 55[/if]");
+            te = new TextEvulator("[if numeric==55]Değer 55[/if]");
             te.LeftTag = '[';
             te.RightTag = ']';
             te.Parse();

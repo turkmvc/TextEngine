@@ -35,7 +35,13 @@ namespace TextEngine.Text
         public string ElemName
         {
             get { return elemName; }
-            set { elemName = value; }
+            set {
+                elemName = value;
+                if(this.BaseEvulator != null)
+                {
+                    this.NoAttrib = this.BaseEvulator.NoAttributedTags.IndexOf(value.ToLower()) >= 0;
+                }
+            }
         }
         private TextElementAttributes elemAttr;
         public TextElementAttributes ElemAttr
@@ -128,6 +134,7 @@ namespace TextEngine.Text
             get { return autoclosed; }
             set { this.autoclosed = value; }
         }
+        public bool NoAttrib { get; set; }
         //private int index;
         public int Index
         {
@@ -211,7 +218,7 @@ namespace TextEngine.Text
                 {
                     if (this.SubElementsCount == 0) return string.Empty;
                 }
-                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + HTMLUTIL.ToAttribute(this.ElemAttr));
+                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib && this.ElementType == TextElementType.ElementNode) ? ' ' + this.value : HTMLUTIL.ToAttribute(this.ElemAttr)));
                 if (this.DirectClosed)
                 {
                     text.Append(" /" + this.BaseEvulator.RightTag);
@@ -258,7 +265,7 @@ namespace TextEngine.Text
                 {
                     additional.Append('=' + this.TagAttrib);
                 }
-                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + HTMLUTIL.ToAttribute(this.ElemAttr));
+                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib) ? ' ' + this.value : HTMLUTIL.ToAttribute(this.ElemAttr))   );
                 if (this.DirectClosed)
                 {
                     text.Append(" /" + this.BaseEvulator.RightTag.ToString());
