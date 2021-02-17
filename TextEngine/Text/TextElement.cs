@@ -218,7 +218,7 @@ namespace TextEngine.Text
                 {
                     if (this.SubElementsCount == 0) return string.Empty;
                 }
-                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib && this.ElementType == TextElementType.ElementNode) ? ' ' + this.value : HTMLUTIL.ToAttribute(this.ElemAttr)));
+                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib && this.ElementType == TextElementType.ElementNode) ? ' ' + this.Value : HTMLUTIL.ToAttribute(this.ElemAttr)));
                 if (this.DirectClosed)
                 {
                     text.Append(" /" + this.BaseEvulator.RightTag);
@@ -265,7 +265,7 @@ namespace TextEngine.Text
                 {
                     additional.Append('=' + this.TagAttrib);
                 }
-                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib) ? ' ' + this.value : HTMLUTIL.ToAttribute(this.ElemAttr))   );
+                text.Append(this.BaseEvulator.LeftTag.ToString() + this.ElemName + additional.ToString() + ((this.NoAttrib) ? ' ' + this.Value : HTMLUTIL.ToAttribute(this.ElemAttr))   );
                 if (this.DirectClosed)
                 {
                     text.Append(" /" + this.BaseEvulator.RightTag.ToString());

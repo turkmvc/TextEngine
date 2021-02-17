@@ -37,15 +37,15 @@ namespace TextEngine.ParDecoder
             for (int i = 0; i < this.TextLength; i++)
             {
                 var cur = this.Text[i];
-                if (cur == '=' || cur == '>' || cur == '<' || cur == '?' || cur == ':')
+                var prev = '\0';
+                if (i - 1 >= 0)
+                {
+                    prev = this.Text[i - 1];
+                }
+                if ((prev != ')' && prev != ']' && prev != '}' ) && (cur == '=' || cur == '>' || cur == '<' || cur == '?' || cur == ':'))
                 {
                     if(isopened)
                     {
-                        var prev = '\0';
-                        if(i - 1  >= 0)
-                        {
-                            prev = this.Text[i - 1];
-                        }
                         InnerItem item = new InnerItem();
                         item.IsOperator = true;
                         if((prev == '>' && cur == '=') || (prev == '<' && cur == '=') || (prev == '!' && cur == '=') || (prev == '=' && cur == '>'))
